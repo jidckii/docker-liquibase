@@ -9,6 +9,7 @@ LABEL maintainer=jidckii@gmail.com
 
 ENV LIQUIBASE_VERSION="3.6.2" \
     MYSQL_DRIVER_VERSION="5.1.45" \
+    SLF4J_VERSION="1.7.25" \
     LIQUIBASE_DRIVER="com.mysql.jdbc.Driver" \
     LIQUIBASE_CLASSPATH="/opt/mysql-connector-java/mysql.jar" \
     LIQUIBASE_URL="" \
@@ -33,6 +34,7 @@ RUN set -x \
     && rm -f /tmp/liquibase.tar.gz \
     && chmod +x /opt/liquibase/liquibase \
     && ln -s /opt/liquibase/liquibase /usr/local/bin/ \
+&& wget -q -O /opt/liquibase/lib/slf4j-api-${SLF4J_VERSION}.jar http://central.maven.org/maven2/org/slf4j/slf4j-api/${SLF4J_VERSION}/slf4j-api-${SLF4J_VERSION}.jar \
 && chmod +x /opt/docker/bin/entrypoint.sh \
     && mkdir /liquibase \
     && ln -sf /opt/docker/bin/entrypoint.sh /entrypoint
